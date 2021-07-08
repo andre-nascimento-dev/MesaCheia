@@ -15,11 +15,16 @@ export const AuthProvider = ({ children }: AuthProviderData) => {
   const handleRegister = (data: User) => {
     mesaCheiaApi.post("/register", data);
   };
+  const handleLogout = () => {
+    setToken("");
+  };
   useEffect(() => {
     localStorage.setItem("@MesaCheia_Token", JSON.stringify(token));
   }, [token]);
   return (
-    <AuthContext.Provider value={{ token, handleLogin, handleRegister }}>
+    <AuthContext.Provider
+      value={{ token, handleLogin, handleRegister, handleLogout }}
+    >
       {children}
     </AuthContext.Provider>
   );
