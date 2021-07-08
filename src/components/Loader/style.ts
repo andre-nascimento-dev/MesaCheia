@@ -6,11 +6,20 @@ const load = keyframes`
   }
 `;
 
+export const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+`;
+
 export const Container = styled.div`
   width: 200px;
   height: 80px;
   background-color: #000;
-
+  box-shadow: 0px 0px 10px 2px #950740;
+  border-radius: 4px;
+  
   p {
     color: #fff;
     text-align: center;
