@@ -2,7 +2,7 @@ export interface Player {
   username: string;
   avatar: string;
   isMaster: boolean;
-  playerdId: number;
+  playerId: number;
 }
 export interface Table {
   userId: number;
