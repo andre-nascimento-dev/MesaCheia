@@ -16,7 +16,7 @@ export const Button = styled.button<ButtonProps>`
   font-size: 24px;
   background-color: ${(props) =>
     props.secondary ? "var(--secondaryButtonBg)" : "var(--mainButtonBg)"};
-  outline-color: var(--secondaryTextColor);
+  outline: none;
   position: relative;
   transition: all 300ms ease-in-out;
 
@@ -50,7 +50,9 @@ export const Button = styled.button<ButtonProps>`
   }
 
   &:hover::before,
-  &:hover::after {
+  &:focus::before,
+  &:hover::after,
+  &:focus::after {
     --scale: 1;
   }
 
