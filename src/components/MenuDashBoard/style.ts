@@ -1,3 +1,4 @@
+import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Menu = styled.nav`
@@ -23,17 +24,18 @@ export const Li = styled.li`
     margin: 0 20px;
   }
 `;
-export const Button = styled.button`
+export const NavLink = styled(Link)`
   background-color: var(--secondaryBgColor);
   font-weight: 700;
   font-size: 1rem;
   outline: none;
   border: none;
-  color: ${(props: { active: boolean }) => (props.active ? "#fff" : "#000")};
-  &:focus {
+  color: var(--mainTextColor);
+  &.active {
     color: var(--secondaryTextColor);
     border-bottom: 1px solid var(--secondaryTextColor);
   }
+  &:focus,
   &:hover {
     color: var(--secondaryTextColor);
     border-bottom: 1px solid var(--secondaryTextColor);

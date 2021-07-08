@@ -1,39 +1,30 @@
-import { useHistory } from "react-router-dom";
 import { useAuth } from "../../provider/Auth";
-import { Menu, Ul, Li, Button } from "./style";
+import { Menu, Ul, Li, NavLink } from "./style";
 
-interface Props {
-  dashboard?: boolean;
-  tables?: boolean;
-  account?: boolean;
-}
-
-const MenuDashboard = ({
-  dashboard = false,
-  tables = false,
-  account = false,
-}: Props) => {
-  const history = useHistory();
+const MenuDashboard = () => {
   const { handleLogout } = useAuth();
   return (
     <Menu>
       <Ul>
-        <Li onClick={() => history.push("dashboard")}>
-          <Button active={dashboard}>Inicio</Button>
+        <Li>
+          <NavLink exact to="/dashbord" activeStyle={{}}>
+            Inicio
+          </NavLink>
         </Li>
-        <Li onClick={() => history.push("tables")}>
-          <Button active={tables}>Buscar mesa</Button>
+        <Li>
+          <NavLink exact to="/tables" activeStyle={{}}>
+            Buscar mesa
+          </NavLink>
         </Li>
-        <Li onClick={() => history.push("account")}>
-          <Button active={account}>Minha conta</Button>
+        <Li>
+          <NavLink exact to="/account" activeStyle={{}}>
+            Minha conta
+          </NavLink>
         </Li>
-        <Li
-          onClick={() => {
-            handleLogout();
-            history.push("/");
-          }}
-        >
-          <Button active={false}>Sair</Button>
+        <Li>
+          <NavLink exact to="/" activeStyle={{}} onClick={() => handleLogout()}>
+            Sair
+          </NavLink>
         </Li>
       </Ul>
     </Menu>
