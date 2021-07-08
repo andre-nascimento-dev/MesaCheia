@@ -5,6 +5,7 @@ export interface ProviderData {
 export interface AuthData {
   handleRegister: (data: User) => void;
   handleLogin: (data: Login) => void;
+  handleLogout: () => void;
   token: string;
 }
 export interface AuthProviderData {
