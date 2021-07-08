@@ -1,4 +1,8 @@
 import { createGlobalStyle } from "styled-components";
+import vecnaWoff from "../assets/font/vecna/VecnaBold.woff";
+import vecnaWoff2 from "../assets/font/vecna/VecnaBold.woff2";
+import vecnaTTF from "../assets/font/vecna/VecnaBold.ttf";
+import vecnaOTF from "../assets/font/vecna/VecnaBold.otf";
 import cursorPointer from "../assets/img/cursor-pointer.png";
 import cursor from "../assets/img/cursor.png";
 
@@ -6,7 +10,10 @@ export const GlobalStyle = createGlobalStyle`
 
 @font-face { 
     font-family: "Vecna";
-    src: url(../assets/font/vecna/VecnaBold.otf);
+    src: url(${vecnaWoff}) format('woff'),
+     url(${vecnaWoff2}) format('woff2'), 
+     url(${vecnaTTF}) format('ttf'), 
+     url(${vecnaOTF}) format('otf');
 }
 
 :root { 
