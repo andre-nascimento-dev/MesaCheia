@@ -17,11 +17,11 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
     props.secondary ? "var(--secondaryButtonBg)" : "var(--mainButtonBg)"};
   border-radius: 8px;
   border: 2px solid transparent;
-  outline-color: var(--secondaryTextColor);
-  outline-width: 1px;
+  outline: none;
+  box-shadow: ${props => props.secondary ? "3px 3px 3px -1px rgba(78,78,80,0.7)" : "3px 3px 3px -1px rgba(195,7,63,0.7)"};
   min-width: ${(props) => (props.small ? "80px" : "150px")};
   padding: 8px 12px;
-  transition: border 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
 
   ${(props) =>
     props.hasIcon &&
@@ -34,6 +34,7 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
     border-color: var(--secondaryTextColor);
+    box-shadow: 3px 3px 3px -1px #fff;
   }
 
   &:disabled {

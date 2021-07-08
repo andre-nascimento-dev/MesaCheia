@@ -1,4 +1,4 @@
-import { Table } from "../../types";
+import { Table } from "../../types/table";
 import Button from "../Button";
 import { Container, Counter, Content } from "./styles";
 

@@ -17,6 +17,7 @@ export const Button = styled.button<ButtonProps>`
   background-color: ${(props) =>
     props.secondary ? "var(--secondaryButtonBg)" : "var(--mainButtonBg)"};
   outline: none;
+  box-shadow: ${props => props.secondary ? "2px 2px 2px -1px rgba(78,78,80,0.7)" : "2px 2px 2px -1px rgba(195,7,63,0.7)"};
   position: relative;
   transition: all 300ms ease-in-out;
 
@@ -59,5 +60,6 @@ export const Button = styled.button<ButtonProps>`
   &:hover,
   &:focus {
     border-color: var(--secondaryTextColor);
+    box-shadow: 2px 2px 2px -1px #fff;
   }
 `;
