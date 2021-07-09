@@ -6,12 +6,14 @@ interface ContainerProps {
 
 export const Container = styled.form<ContainerProps>`
   width: 300px;
-  padding: 15px;
+  padding: 16px;
   display: flex;
-  flex-flow: column wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
   border-radius: 10px;
 
   ${(props) => css`
-    background: ${props.isTransparent ? "none" : "var(--secondaryBgColor)"};
+    background: ${props.isTransparent ? "rgb(111,34,50, 0.8)" : "var(--secondaryBgColor)"};
   `}
 `;

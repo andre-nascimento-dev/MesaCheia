@@ -1,16 +1,19 @@
 import { ReactNode } from "react";
-import { Container, Wrapper } from "./Styles";
+import Fade from "@material-ui/core/Fade";
+import { Container, Wrapper } from "./styles";
 
 interface BackDropProps {
   children: ReactNode;
-  isOponed: boolean;
+  isOpened: boolean;
 }
 
-const BackDrop = ({ children, isOponed }: BackDropProps) => {
+const BackDrop = ({ children, isOpened }: BackDropProps) => {
   return (
-    <Container isOponed={isOponed}>
-      {isOponed && <Wrapper>{children}</Wrapper>}
-    </Container>
+    <Fade in={isOpened}>
+      <Container>
+        <Wrapper>{children}</Wrapper>
+      </Container>
+    </Fade>
   );
 };
 

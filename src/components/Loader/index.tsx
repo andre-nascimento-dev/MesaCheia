@@ -8,7 +8,7 @@ const Loader = () => {
   return (
     <Wrapper>
     <Container>
-      <p>Loading...</p>
+      <p>Carregando...</p>
       <Bar>
         <div/>
       </Bar>

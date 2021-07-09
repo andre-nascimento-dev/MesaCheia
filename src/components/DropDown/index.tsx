@@ -1,13 +1,13 @@
 import { ReactNode } from "react";
-import { MyMenu } from "./Styles";
+import { MyMenu } from "./styles";
 
 interface DropDwonProps {
   children: ReactNode;
   open: boolean;
 }
 
-const DropDwon = ({ children, open }: DropDwonProps) => {
+const DropDown = ({ children, open }: DropDwonProps) => {
   return <>{open && <MyMenu open={open}>{children}</MyMenu>}</>;
 };
 
-export default DropDwon;
+export default DropDown;
