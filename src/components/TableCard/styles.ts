@@ -4,11 +4,20 @@ export const Container = styled.div`
   background: var(--secondaryBgColor);
   display: flex;
   flex-direction: column;
+  font-size: 0.8rem;
   padding: 5px;
+  width: 250px;
+  border-radius: 10px;
 
   > div {
     display: flex;
     justify-content: space-between;
+    padding: 5px;
+  }
+
+  @media only screen and (min-width: 768px) {
+    width: 350px;
+    font-size: 1rem;
   }
 `;
 export const Counter = styled.div`
