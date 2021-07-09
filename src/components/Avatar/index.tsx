@@ -11,7 +11,12 @@ const Avatar = ({ avatarUrl, size, isMaster, isSelectable }: AvatarProps) => {
   console.log(isSelectable);
   return (
     <MyAvatar size={size}>
-      <Icon size={size} src={avatarUrl} alt={avatarUrl} />
+      <Icon
+        size={size}
+        src={avatarUrl}
+        alt={avatarUrl}
+        isSelectable={isSelectable}
+      />
       {isMaster && <Star src={Star1} alt={Star1} />}
     </MyAvatar>
   );
