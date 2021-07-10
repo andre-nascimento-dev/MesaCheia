@@ -2,7 +2,6 @@ import { User } from "../../types/user";
 import {
   createContext,
   useContext,
-  useEffect,
   useState,
   ReactNode,
 } from "react";
@@ -27,15 +26,19 @@ interface AuthProviderData {
 const AuthContext = createContext<AuthData>({} as AuthData);
 
 export const AuthProvider = ({ children }: AuthProviderData) => {
+  const token = localStorage.getItem("@MesaCheia_Token") || "";
 
-  const [token, setToken] = useState(
-    JSON.parse(localStorage.getItem("@MesaCheia_Token") || "null")
-  );
+  const [auth, setAuth] = useState<string>(token);
 
   const handleLogin = (data: Login) => {
     mesaCheiaApi
       .post("/login", data)
-      .then(({ data }) => setToken(data.accessToken));
+      .then(({ data }) =>
+        localStorage.setItem(
+          "@MesaCheia_Token",
+          JSON.stringify(data.accessToken)
+        )
+      );
   };
 
   const handleRegister = (data: User) => {
@@ -43,16 +46,13 @@ export const AuthProvider = ({ children }: AuthProviderData) => {
   };
 
   const handleLogout = () => {
-    setToken("");
+    localStorage.clear();
+    setAuth("");
   };
 
-  useEffect(() => {
-    localStorage.setItem("@MesaCheia_Token", JSON.stringify(token));
-  }, [token]);
-  
   return (
     <AuthContext.Provider
-      value={{ token, handleLogin, handleRegister, handleLogout }}
+      value={{ token: auth, handleLogin, handleRegister, handleLogout }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,16 +1,18 @@
 import styled from "styled-components";
 
 export const Container = styled.nav`
-  background-color:rgba(78, 78, 80, 0.8);
+  background-color:rgba(78, 78, 80);
   width: 100%;
   position: fixed;
   bottom: 0;
+  z-index: 1;
 
   @media only screen and (min-width: 768px) {
     left: 0;
     bottom: auto;
     width: auto;
     height: 100%;
+    background-color:rgba(78, 78, 80, 0.8);
   }
 `;
 
