@@ -1,4 +1,4 @@
-import { MyAvatar, Icon, Star } from "./Styles";
+import { MyAvatar, Icon, Star } from "./styles";
 import Star1 from "../../assets/img/Star1.svg";
 
 interface AvatarProps {
@@ -8,7 +8,6 @@ interface AvatarProps {
   isSelectable?: boolean;
 }
 const Avatar = ({ avatarUrl, size, isMaster, isSelectable }: AvatarProps) => {
-  console.log(isSelectable);
   return (
     <MyAvatar size={size}>
       <Icon
