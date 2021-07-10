@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.nav`
-  background: var(--secondaryButtonBg);
-  opacity: 0.7;
-  padding: 5px;
+  background-color:rgba(78, 78, 80, 0.8);
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -21,20 +19,43 @@ export const List = styled.ul`
   justify-content: space-around;
 
   @media only screen and (min-width: 768px) {
-    height: 100%;
+    padding-top: 2rem;
     flex-direction: column;
+    gap: 2rem;
   }
 `;
 
 export const ListItem = styled.li`
-  text-align: center;
   a {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding-top: 0.5rem;
     color: var(--secondaryTextColor);
+    outline: none;
     transition: ease-in-out 300ms;
 
-    :hover,
-    :focus {
+    @media (min-width: 768px) {
+      padding: 0 0.5rem;
+    }
+
+    svg {
+      font-size: 1.5rem;
+      transition: ease-in-out 300ms;
+
+      @media (min-width: 768px) {
+        font-size: 2rem;
+      }
+    }
+
+  &:hover, &:focus {
       text-shadow: 0 0 3px var(--secondaryTextColor);
+
+      svg {
+        color: #950740;
+      }
     }
   }
 `;

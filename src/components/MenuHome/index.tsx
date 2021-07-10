@@ -9,27 +9,27 @@ const MenuHome = () => {
     <Container>
       <List>
         <ListItem>
-          <Link to="/">
-            <AiFillHome size={20} />
-            <p>Início</p>
-          </Link>
+          <a href="#home">
+            <AiFillHome/>
+            Início
+          </a>
         </ListItem>
         <ListItem>
-          <Link to="/about">
-            <BsFillInfoCircleFill size={20} />
-            <p>Sobre</p>
-          </Link>
+          <a href="#about">
+            <BsFillInfoCircleFill/>
+            Sobre
+          </a>
         </ListItem>
         <ListItem>
           <Link to="/login">
-            <RiLoginCircleFill size={20} />
-            <p>Entrar</p>
+            <RiLoginCircleFill/>
+            Entrar
           </Link>
         </ListItem>
         <ListItem>
           <Link to="/register">
-            <RiSendPlaneFill size={20} />
-            <p>Cadastrar</p>
+            <RiSendPlaneFill/>
+            Cadastrar
           </Link>
         </ListItem>
       </List>
