@@ -27,9 +27,7 @@ const Input = ({
         {Icon && <Icon />}
         <input {...register(name)} {...rest} />
       </InputContainer>
-      <div>
-      {!!error && <span>{error}</span>}
-      </div>
+      <div>{!!error && <span>{error}</span>}</div>
     </Container>
   );
 };
