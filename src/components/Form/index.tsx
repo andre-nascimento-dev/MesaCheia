@@ -1,24 +1,24 @@
-import { ReactNode } from "react";
 import { Container } from "./style";
+import { ReactNode } from "react";
 
 interface FormProps {
   isTransparent?: boolean;
   children: ReactNode;
-  onSubmit: (data: object) => void;
   autoComplete?: string;
+  onSubmit: () => void;
 }
 
 const Form = ({
   isTransparent,
   children,
-  onSubmit,
   autoComplete,
+  onSubmit,
 }: FormProps) => {
   return (
     <Container
       isTransparent={isTransparent}
-      onSubmit={onSubmit}
       autoComplete={autoComplete}
+      onSubmit={onSubmit}
     >
       {children}
     </Container>
