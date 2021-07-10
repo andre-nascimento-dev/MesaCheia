@@ -26,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
     --secondaryTextColor: #fff;
 }
 
-html, body, div, ul ,li, figure, figcaption, h1, h2, h3, h4, h5, h6, p, a, form, input, button, main, section, header, footer {
+html, body, div, ul ,li, figure, figcaption, h1, h2, h3, h4, h5, h6, p, a, form, input, button, main, section, nav, header, footer {
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
@@ -39,6 +39,26 @@ html, body {
     font-family: 'Roboto', serif;
     scroll-behavior: smooth;
     background-color: var(--mainBgColor);
+}
+
+body {
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+    width: 1rem;
+    }
+
+    &::-webkit-scrollbar-track {
+    background-color: #4e4e50;
+    }
+
+    &::-webkit-scrollbar-thumb {
+    background-color: #6f2232;
+
+    &:hover {
+        background-color: #950740;
+    }
+    }
 }
 
 button, a { 
