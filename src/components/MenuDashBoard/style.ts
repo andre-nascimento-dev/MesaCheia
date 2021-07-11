@@ -40,7 +40,7 @@ export const NavLink = styled(Link)`
     color: var(--secondaryTextColor);
     border-bottom: 1px solid var(--secondaryTextColor);
   }
-  @media only screen and (min-width: 1024px) {
-    font-size: 2rem;
+  @media only screen and (min-width: 768px) {
+    font-size: 1.5rem;
   }
 `;
