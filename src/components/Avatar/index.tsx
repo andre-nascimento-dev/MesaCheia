@@ -1,5 +1,5 @@
 import { MyAvatar, Icon, Star } from "./styles";
-import Star1 from "../../assets/img/Star1.svg";
+import Star1 from "../../assets/img/Star 1.svg";
 
 interface AvatarProps {
   avatarUrl: string;

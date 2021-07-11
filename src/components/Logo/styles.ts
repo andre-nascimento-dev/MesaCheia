@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const Container = styled.header`
   width: 100vw;
   padding: 8px;
-  @media (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     text-align: center;
   }
 `;
@@ -18,7 +18,7 @@ export const Title = styled.h1`
   font-family: "Vecna";
   font-weight: bold;
   font-size: 50px;
-  @media (max-width: 768px) {
-    font-size: 30px;
+  @media only screen and (max-width: 768px) {
+    /* font-size: 30px; */
   } ;
 `;

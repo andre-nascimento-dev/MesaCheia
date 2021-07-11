@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.header`
   width: 100vw;
-  height: 60px;
+  height: 99px;
   background-color: var(--secondaryBgColor);
   display: flex;
   flex-direction: row;
@@ -18,9 +18,8 @@ export const Title = styled.h1`
   font-family: "Vecna";
   display: none;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 70px;
   @media (min-width: 768px) {
-    font-size: 2rem;
     display: block;
   } ;
 `;
