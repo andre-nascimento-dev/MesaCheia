@@ -35,20 +35,23 @@ export const AuthProvider = ({ children }: AuthProviderData) => {
           "@MesaCheia_Token",
           JSON.stringify(data.accessToken)
         )
+      )
+      .catch(() =>
+        showToast({ type: "error", message: "E-mail ou senha incorretos." })
       );
   };
 
   const handleRegister = (data: User, history: History) => {
     mesaCheiaApi
       .post("/register", data)
-      .then((response) => {
+      .then(() => {
         showToast({
           type: "success",
           message: "Sucesso ao criar a conta! Faça seu login :D",
         });
         history.push("/login");
       })
-      .catch((error) =>
+      .catch(() =>
         showToast({ type: "error", message: "E-mail já cadastrado." })
       );
   };
