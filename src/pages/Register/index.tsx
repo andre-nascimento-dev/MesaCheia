@@ -1,17 +1,30 @@
 import * as yup from "yup";
+import { Link, useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Form from "../../components/Form";
-import RegisterImg from "../../assets/img/register-background.jpg";
-import { Container, Img, BoxContent, Title, Header, Box } from "./style";
 import { useForm } from "react-hook-form";
-import Input from "../../components/Input";
 import { FaUserAlt } from "react-icons/fa";
-import { GrMail } from "react-icons/gr";
-import { GiPadlock } from "react-icons/gi";
+import { MdEmail } from "react-icons/md";
+import { BsFillLockFill } from "react-icons/bs";
+import { Container, BoxContent, Box, Redirect } from "./style";
+import { useAuth } from "../../provider/Auth";
+import { User } from "../../types/user";
+import Form from "../../components/Form";
+import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Logo from "../../components/Logo";
+import avatarUrl from "../../components/Avatar/avatar.json";
+
+interface FormValue {
+  username: string;
+  email: string;
+  password: string;
+  isMaster: string;
+}
 
 const Register = () => {
+  const { handleRegister } = useAuth();
+  const history = useHistory();
+
   const schema = yup.object({
     username: yup
       .string()
@@ -25,24 +38,35 @@ const Register = () => {
       .min(6, "Mínimo de 6 caracteres"),
     confirmPassword: yup
       .string()
-      .oneOf([yup.ref("password")], "Deve ser igual a senha "),
-    isMaster: yup.string().nullable().required("Campo obrigatório"),
+      .required("Campo obrigatório")
+      .oneOf([yup.ref("password")], "Deve ser igual a senha"),
+    isMaster: yup.string().required("Campo obrigatório"),
   });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-  const handleOnSubmit = (data: any) => {
-    console.log(data);
+
+  const onSubmit = ({ username, email, password, isMaster }: FormValue) => {
+    const isMasterBoolean = isMaster === "true" ? true : false;
+    const userData: User = {
+      username,
+      email,
+      password,
+      isMaster: isMasterBoolean,
+      avatar: avatarUrl.userDefault,
+      joinedTables: [],
+    };
+    handleRegister(userData, history);
   };
 
   return (
     <Container>
-      <Logo />
+      <Logo goToHome />
       <BoxContent>
-        <Img src={RegisterImg} alt="RegisterImg" />
-        <Form onSubmit={handleSubmit(handleOnSubmit)} isTransparent>
+        <Form onSubmit={handleSubmit(onSubmit)} isTransparent>
           <Input
             label="Usuário*"
             register={register}
@@ -57,7 +81,7 @@ const Register = () => {
             name="email"
             error={errors.email?.message}
             placeholder="Email"
-            icon={GrMail}
+            icon={MdEmail}
           />
 
           <Input
@@ -66,7 +90,7 @@ const Register = () => {
             name="password"
             error={errors.password?.message}
             placeholder="Senha"
-            icon={GiPadlock}
+            icon={BsFillLockFill}
             type="password"
           />
           <Input
@@ -75,30 +99,38 @@ const Register = () => {
             name="confirmPassword"
             error={errors.confirmPassword?.message}
             placeholder="Confirmar senha"
-            icon={GiPadlock}
+            icon={BsFillLockFill}
             type="password"
           />
 
           <Box>
-            <span>Você é mestre?*</span>
-            <input
-              type="radio"
-              id="sim"
-              value="true"
-              {...register("isMaster")}
-            />
-            <label htmlFor="sim">Sim</label>
-            <input
-              type="radio"
-              id="nao"
-              value="false"
-              {...register("isMaster")}
-            />
+            <div>
+              <span>Você é mestre?*</span>
+              <input
+                type="radio"
+                id="isMaster"
+                value="true"
+                {...register("isMaster")}
+              />
+              <label htmlFor="isMaster">Sim</label>
+              <input
+                type="radio"
+                id="isNotMaster"
+                value="false"
+                {...register("isMaster")}
+              />
 
-            <label htmlFor="nao">Não</label>
+              <label htmlFor="isNotMaster">Não</label>
+            </div>
+            <div>{errors.isMaster?.message}</div>
           </Box>
-          {errors.isMaster?.message}
-          <Button type="submit">Cadastrar</Button>
+          <Button type="submit" biggerFont>
+            Cadastrar
+          </Button>
+
+          <Redirect>
+            Já está cadastrado? <Link to="/login">Entrar na conta</Link>
+          </Redirect>
         </Form>
       </BoxContent>
     </Container>

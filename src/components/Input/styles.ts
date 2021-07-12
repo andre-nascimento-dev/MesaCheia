@@ -16,33 +16,44 @@ export const Container = styled.div<ContainerProps>`
   color: var(--secondaryTextColor);
   font-weight: bold;
   padding: 2px;
+  width: 88%;
 
-  span {
-    color: var(--mainButtonBg);
-    text-shadow: 0 0 5px var(--mainTextColor);
-    font-weight: normal;
+  div:last-child {
+    height: 20px;
+
+    span {
+      color: #c53030;
+      text-shadow: 2px 2px 2px var(--mainTextColor);
+    }
   }
 `;
 
 export const InputContainer = styled.div<InputContainerProps>`
   background: var(--secondaryTextColor);
-  border-radius: 5px;
+  border-radius: 4px;
   display: flex;
-  padding: 3px;
-  border: 2px solid var(--secondaryTextColor);
+  align-items: center;
+  padding-left: 2px;
+  gap: 4px;
+  border: 2px solid transparent;
   transition: border ease-in-out 300ms;
 
   :hover,
   :focus {
-    border: 2px solid var(--secondaryButtonBg);
+    border-color: #000;
+  }
+
+  svg {
+    color: var(--mainTextColor);
   }
 
   ${(props) =>
     props.isErrored &&
     css`
-      border: 2px solid var(--mainButtonBg);
-      > svg {
-        color: var(--mainButtonBg);
+      border-color: #c53030;
+
+      svg {
+        color: #c53030;
       }
     `}
 
@@ -52,14 +63,18 @@ export const InputContainer = styled.div<InputContainerProps>`
     width: 100%;
     color: var(--mainTextColor);
     flex: 1;
-    border: 0;
-    transition: 300ms;
+    padding: 4px;
+    outline: none;
+    border: none;
+    border-radius: 0 4px 4px 0;
+
+    &:hover,
+    &:focus {
+      background-color: pink;
+    }
 
     ::placeholder {
       color: var(--secondaryButtonBg);
     }
-  }
-  svg {
-    color: var(--mainTextColor);
   }
 `;

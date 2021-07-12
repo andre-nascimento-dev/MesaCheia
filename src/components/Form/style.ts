@@ -6,11 +6,11 @@ interface ContainerProps {
 
 export const Container = styled.form<ContainerProps>`
   width: 300px;
-  padding: 16px;
+  height: fit-content;
+  padding: 24px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
   border-radius: 10px;
 
   ${(props) => css`
