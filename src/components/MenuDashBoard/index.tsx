@@ -7,17 +7,17 @@ const MenuDashboard = () => {
     <Menu>
       <Ul>
         <Li>
-          <NavLink exact to="/dashbord" activeStyle={{}}>
+          <NavLink exact to="/dashboard" activeStyle={{}}>
             Inicio
           </NavLink>
         </Li>
         <Li>
-          <NavLink exact to="/tables" activeStyle={{}}>
+          <NavLink exact to="/dashboard/tables" activeStyle={{}}>
             Buscar mesa
           </NavLink>
         </Li>
         <Li>
-          <NavLink exact to="/account" activeStyle={{}}>
+          <NavLink exact to="/dashboard/profile" activeStyle={{}}>
             Minha conta
           </NavLink>
         </Li>
