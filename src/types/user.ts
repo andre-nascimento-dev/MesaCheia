@@ -5,4 +5,5 @@ export interface User {
   isMaster: boolean;
   avatar: string;
   joinedTables: number[];
+  id?: number;
 }

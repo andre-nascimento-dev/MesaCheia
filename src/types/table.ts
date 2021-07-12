@@ -16,4 +16,5 @@ export interface Table {
   total: number;
   isFull: boolean;
   players: Player[];
+  id?: number;
 }
