@@ -6,13 +6,20 @@ import Button from "../../components/Button";
 import Logo from "../../components/Logo";
 import FloatButton from "../../components/FloatButton";
 import Hidden from '@material-ui/core/Hidden';
+import { useUser } from "../../provider/User";
+import { useEffect } from "react";
+import { User } from "../../types/user";
 
 
 const Dashboard = () => {
 
+   const {user, getUserProfile} = useUser();
+
+   useEffect(() => {getUserProfile()}, []);
+
    const func = () => {
 
-   }
+   };
 
    const table = {
       userId: 15,
@@ -49,18 +56,19 @@ const Dashboard = () => {
     const onclick = () => {
       console.log("entrou");
     };
+    console.log(user);
 
    return (
       <ContainerDashboard>
          <Header/>
          <Container>
             <Hidden smUp><Logo/></Hidden>
-            <TitleMessage>Olá, aventureiro Paizão André</TitleMessage>
+            <TitleMessage>{`Olá, aventureiro ${user?.username}!`}</TitleMessage>
             <ContainerButtons>
                <TabMenu
                   textFirstBtn="Mesas que participo"
                   textSecondBtn="Mesas que mestro"
-                  isMaster
+                  isMaster={user.isMaster ?? false}
                   isActived
                />
                <Hidden only="xs"><Button hasIcon={true} biggerFont={true}><Icon/>criar mesa</Button></Hidden>
