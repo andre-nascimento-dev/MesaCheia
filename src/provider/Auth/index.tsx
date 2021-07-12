@@ -23,19 +23,22 @@ interface AuthProviderData {
 const AuthContext = createContext<AuthData>({} as AuthData);
 
 export const AuthProvider = ({ children }: AuthProviderData) => {
-  const token = localStorage.getItem("@MesaCheia_Token") || "";
+  const token =
+    JSON.parse(localStorage.getItem("@MesaCheia_Token") || "null") || "";
 
   const [auth, setAuth] = useState<string>(token);
 
   const handleLogin = (data: Login, history: History) => {
     mesaCheiaApi
       .post("/login", data)
-      .then(({ data }) =>
+      .then(({ data }) => {
         localStorage.setItem(
           "@MesaCheia_Token",
           JSON.stringify(data.accessToken)
-        )
-      )
+        );
+        setAuth(data.accessToken);
+        history.push("/dashboard");
+      })
       .catch(() =>
         showToast({ type: "error", message: "E-mail ou senha incorretos." })
       );
@@ -60,7 +63,6 @@ export const AuthProvider = ({ children }: AuthProviderData) => {
     localStorage.clear();
     setAuth("");
   };
-
   return (
     <AuthContext.Provider
       value={{ token: auth, handleLogin, handleRegister, handleLogout }}
