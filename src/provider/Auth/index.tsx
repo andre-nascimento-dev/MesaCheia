@@ -1,11 +1,8 @@
-import { User } from "../../types/user";
-import {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-} from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
+import { History } from "history";
 import { mesaCheiaApi } from "../../services";
+import { User } from "../../types/user";
+import { showToast } from "../../components/Toast";
 
 interface Login {
   email: string;
@@ -13,8 +10,8 @@ interface Login {
 }
 
 interface AuthData {
-  handleRegister: (data: User) => void;
-  handleLogin: (data: Login) => void;
+  handleRegister: (data: User, history: History) => void;
+  handleLogin: (data: Login, history: History) => void;
   handleLogout: () => void;
   token: string;
 }
@@ -30,7 +27,7 @@ export const AuthProvider = ({ children }: AuthProviderData) => {
 
   const [auth, setAuth] = useState<string>(token);
 
-  const handleLogin = (data: Login) => {
+  const handleLogin = (data: Login, history: History) => {
     mesaCheiaApi
       .post("/login", data)
       .then(({ data }) =>
@@ -41,8 +38,19 @@ export const AuthProvider = ({ children }: AuthProviderData) => {
       );
   };
 
-  const handleRegister = (data: User) => {
-    mesaCheiaApi.post("/register", data);
+  const handleRegister = (data: User, history: History) => {
+    mesaCheiaApi
+      .post("/register", data)
+      .then((response) => {
+        showToast({
+          type: "success",
+          message: "Sucesso ao criar a conta! Faça seu login :D",
+        });
+        history.push("/login");
+      })
+      .catch((error) =>
+        showToast({ type: "error", message: "E-mail já cadastrado." })
+      );
   };
 
   const handleLogout = () => {

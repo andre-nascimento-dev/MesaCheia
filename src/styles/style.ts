@@ -61,8 +61,9 @@ body {
     }
 }
 
-button, a { 
+button, input, label, a { 
     cursor:url(${cursorPointer}), auto;
     font-family: 'Roboto', serif;
 }
+
 `;
