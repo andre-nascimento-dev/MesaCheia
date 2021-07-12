@@ -1,22 +1,32 @@
 import { MyAvatar, Icon, Star } from "./styles";
-import Star1 from "../../assets/img/Star 1.svg";
+import star from "../../assets/img/star.svg";
 
 interface AvatarProps {
-  avatarUrl: string;
+  url: string;
+  alt: "Avatar do usuário" | "Avatar da mesa";
   size: string;
   isMaster?: boolean;
   isSelectable?: boolean;
+  isSelected?: boolean;
 }
-const Avatar = ({ avatarUrl, size, isMaster, isSelectable }: AvatarProps) => {
+const Avatar = ({
+  url,
+  alt,
+  size,
+  isMaster,
+  isSelectable,
+  isSelected,
+}: AvatarProps) => {
   return (
     <MyAvatar size={size}>
       <Icon
         size={size}
-        src={avatarUrl}
-        alt={avatarUrl}
+        src={url}
+        alt={alt}
         isSelectable={isSelectable}
+        isSelected={isSelected}
       />
-      {isMaster && <Star src={Star1} alt={Star1} />}
+      {isMaster && <Star src={star} alt="Estrela do mestre" size={size} />}
     </MyAvatar>
   );
 };

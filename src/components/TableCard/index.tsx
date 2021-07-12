@@ -1,8 +1,8 @@
 import { Table } from "../../types/table";
 import Avatar from "../Avatar";
+import urlAvatar from "../Avatar/avatar.json";
 import Button from "../Button";
 import { Container, Counter, Content } from "./styles";
-import Shield from "../../assets/img/Shield.svg";
 import { Hidden } from "@material-ui/core";
 
 interface TableCardProps {
@@ -16,11 +16,11 @@ const TableCard = ({ table, isJoin, onClick }: TableCardProps) => {
     <Container>
       <div>
         <Hidden smUp>
-          <Avatar avatarUrl={Shield} size="30" />
+          <Avatar url={urlAvatar.tableDefault} size="30" alt="Avatar da mesa" />
         </Hidden>
 
         <Hidden only="xs">
-          <Avatar avatarUrl={Shield} size="50" />
+          <Avatar url={urlAvatar.tableDefault} size="50" alt="Avatar da mesa" />
         </Hidden>
 
         <h2>{table.name}</h2>
