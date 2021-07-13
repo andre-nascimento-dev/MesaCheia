@@ -4,9 +4,10 @@ import { IoMdNavigate } from "react-icons/io";
 
 export const DashBoardTables = styled.div`
   @media only screen and (max-width: 768px) {
+    height: 100vh;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column-reverse;
-    height: 100vh;
   }
 `;
 
@@ -18,28 +19,30 @@ export const NavButtons = styled.nav`
 `;
 
 export const Myform = styled.form`
-  margin-top: 50px;
-  max-width: 820px;
   display: flex;
-  align-items: center;
   justify-content: space-around;
+  width: 60%;
+  margin-top: 50px;
   flex-wrap: wrap;
   @media only screen and (max-width: 768px) {
     margin-top: 20px;
+    width: 100%;
   }
 `;
 
 export const SearchContainer = styled.section`
   width: 400px;
   @media only screen and (max-width: 768px) {
-    width: 90%;
+    display: flex;
+    justify-content: center;
+    width: 95%;
     margin-bottom: 10px;
   }
 `;
 
 export const InputSearch = styled(Input)`
   && {
-    height: 30px;
+    height: 41px;
     outline: none;
     font-size: 16px;
   }
@@ -70,7 +73,7 @@ export const SelectContainer = styled.section`
 `;
 
 export const ButtonContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 23px;
 `;
 
 export const BoxTables = styled.div`
@@ -85,7 +88,7 @@ export const ListTables = styled.ul`
   justify-content: space-around;
   flex-wrap: wrap;
   width: 90vw;
-  height: 65vh;
+  height: 55vh;
   margin-top: 40px;
   overflow: auto;
   ::-webkit-scrollbar {
@@ -103,7 +106,7 @@ export const ListTables = styled.ul`
 
   @media only screen and (max-width: 768px) {
     width: 100vw;
-    height: 25vh;
+    height: 20vh;
     justify-content: center;
     ::-webkit-scrollbar {
       display: none;
@@ -135,4 +138,10 @@ export const IconNav = styled(IoMdNavigate)`
   && {
     color: var(--secondaryTextColor);
   }
+`;
+
+export const WrapperModal = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
 `;

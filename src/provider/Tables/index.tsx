@@ -63,9 +63,11 @@ export const TablesProvider = ({ children }: TablesData) => {
   };
 
   useEffect(() => {
-    getTables();
+    if (token) {
+      getTables();
+    }
     //eslint-disable-next-line
-  }, []);
+  }, [token]);
 
   return (
     <TablesProviderContext.Provider
