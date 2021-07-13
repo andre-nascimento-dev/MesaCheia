@@ -16,15 +16,9 @@ import Logo from "../../components/Logo";
 import FloatButton from "../../components/FloatButton";
 import Hidden from "@material-ui/core/Hidden";
 import { useUser } from "../../provider/User";
-import { useEffect } from "react";
 
 const Dashboard = () => {
-  const { user, getUserProfile } = useUser();
-
-  useEffect(() => {
-    getUserProfile();
-    //eslint-disable-next-line
-  }, []);
+  const { user } = useUser();
 
   const func = () => {};
 
