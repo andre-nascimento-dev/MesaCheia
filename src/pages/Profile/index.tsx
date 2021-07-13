@@ -44,7 +44,7 @@ const Profile = () => {
     <main>
       {!!user ? (
         <>
-          <FullContainer>
+          {/* <FullContainer>
             <Container>
               <FirstContent>
                 <Avatar
@@ -138,7 +138,7 @@ const Profile = () => {
                 </BackDrop>
               )}
             </Container>
-          </FullContainer>
+          </FullContainer> */}
 
           <MenuDashboard />
         </>

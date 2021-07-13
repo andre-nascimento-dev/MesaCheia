@@ -11,8 +11,11 @@ import TableCard from "../../components/TableCard";
 import FloatButton from "../../components/FloatButton";
 import Logo from "../../components/Logo";
 import Loader from "../../components/Loader";
+import BackDrop from "../../components/BackDrop";
 
 import { BiSearch } from "react-icons/bi";
+import { GoCheck } from "react-icons/go";
+import { CgClose } from "react-icons/cg";
 import image53 from "../../assets/img/image53.png";
 import Hidden from "@material-ui/core/Hidden";
 import {
@@ -29,6 +32,7 @@ import {
   Container,
   ImgContainer,
   IconNav,
+  WrapperModal,
 } from "./styles";
 import { useState } from "react";
 
@@ -55,7 +59,6 @@ const Tables = () => {
   const handleForm = (data: any) => {
     searchTables(data);
   };
-  console.log(listTables);
 
   const [test, setTest] = useState(false);
   return (
@@ -87,7 +90,7 @@ const Tables = () => {
           <SelectContainer>
             <label>Buscar Por*</label>
             <select {...register("select")} name="select">
-              <option defaultValue="none" selected disabled hidden>
+              <option selected disabled hidden>
                 Selecione
               </option>
               <option value="id">ID</option>
@@ -114,6 +117,13 @@ const Tables = () => {
         </Myform>
         <BoxTables>
           <ListTables>
+            <BackDrop isOpened={false}>
+              <p>Você Quer Mesmo Fazer Isso?</p>
+              <WrapperModal>
+                <FloatButton title="Não" icon={CgClose} type="button" />
+                <FloatButton title="Sim" icon={GoCheck} type="button" />
+              </WrapperModal>
+            </BackDrop>
             {loading ? (
               <Loader />
             ) : (
