@@ -31,12 +31,16 @@ const UserContext = createContext<UserData>({} as UserData);
 export const UserProvider = ({ children }: UserProviderData) => {
   const { token } = useAuth();
 
-  const [id, setId] = useState("");
   const [user, setUser] = useState({ username: "" });
 
   const getUserProfile = () => {
     const decoded: DecodedData = jwt_decode(token);
-    setId(decoded.sub);
+    mesaCheiaApi
+      .get(`users/${decoded.sub}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => setUser(response.data))
+      .catch((error) => console.log(error));
   };
   useEffect(() => {
     if (token) {
@@ -44,15 +48,6 @@ export const UserProvider = ({ children }: UserProviderData) => {
     }
     //eslint-disable-next-line
   }, [token]);
-  useEffect(() => {
-    if (id) {
-      mesaCheiaApi
-        .get(`users/${id}`, { headers: { Authorization: `Bearer ${token}` } })
-        .then((response) => setUser(response.data))
-        .catch((error) => console.log(error));
-    }
-    //eslint-disable-next-line
-  }, [id]);
 
   return (
     <UserContext.Provider value={{ user, getUserProfile }}>
