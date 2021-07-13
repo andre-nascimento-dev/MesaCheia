@@ -76,11 +76,11 @@ const Register = () => {
             icon={FaUserAlt}
           />
           <Input
-            label="Email*"
+            label="E-mail*"
             register={register}
             name="email"
             error={errors.email?.message}
-            placeholder="Email"
+            placeholder="E-mail"
             icon={MdEmail}
           />
 

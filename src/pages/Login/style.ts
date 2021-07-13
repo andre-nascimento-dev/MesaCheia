@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import loginBg from "../../assets/img/login-background.jpg";
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,11 +23,11 @@ export const BoxContent = styled.div`
   flex-grow: 1;
 
   @media (min-width: 768px) {
-    height: 80vh;
     background: url(${loginBg}) no-repeat center;
     background-size: cover;
   }
 `;
+
 export const Redirect = styled.span`
   font-size: 0.7rem;
   color: #fff;

@@ -2,22 +2,22 @@ import styled from "styled-components";
 import cursorPointer from "../../assets/img/cursor-pointer.png";
 import { Menu } from "@material-ui/core";
 
-export const MyMenu = styled(Menu)`
+export const MenuStyled = styled(Menu)`
   ul {
     background: var(--secondaryButtonBg);
     color: var(--secondaryTextColor);
     text-align: center;
-    width: 150px;
-    font-size: 24px;
   }
 
   li {
-    padding: 6px 12px;
-    transition: 0.3s;
-  }
-
-  li:hover {
-    background-color: rgba(0, 0, 0, 0.14);
+    padding: 0.5rem 1.5rem;
     cursor: url(${cursorPointer}), auto;
+    transition: all 300ms ease-in-out;
+
+    &:hover,
+    &:focus {
+      background-color: rgba(0, 0, 0, 0.14);
+      outline: none;
+    }
   }
 `;
