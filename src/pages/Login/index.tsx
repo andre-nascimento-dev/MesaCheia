@@ -10,7 +10,6 @@ import { Container, Redirect, BoxContent } from "./style";
 import Button from "../../components/Button";
 import Logo from "../../components/Logo";
 import { Link, useHistory } from "react-router-dom";
-import Motion from "../../components/Motion";
 
 interface LoginData {
   email: string;
