@@ -4,12 +4,15 @@ import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
 import Route from "./route";
 import NotFound from "../pages/NotFound";
+import Tables from "../pages/tables";
 import Login from "../pages/Login";
 
 const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route exact path="/register" component={Register} />
+      <Route exact path="/dashboard/tables" component={Tables} isPrivate />
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Route exact path="/dashboard" component={Dashboard} isPrivate />

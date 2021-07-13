@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { AuthProvider } from "./Auth";
+import { TablesProvider } from "./Tables";
 import { UserProvider } from "./User";
 
 interface ProviderData {
@@ -8,9 +9,9 @@ interface ProviderData {
 const Provider = ({ children }: ProviderData) => {
   return (
     <AuthProvider>
-      <UserProvider>
-        {children}
-      </UserProvider>
+      <TablesProvider>
+        <UserProvider>{children}</UserProvider>
+      </TablesProvider>
     </AuthProvider>
   );
 };
