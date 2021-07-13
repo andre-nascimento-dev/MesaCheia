@@ -2,7 +2,7 @@ import { MyAvatar, Icon, Star } from "./styles";
 import star from "../../assets/img/star.svg";
 
 interface AvatarProps {
-  url: string;
+  url?: string;
   alt: "Avatar do usuário" | "Avatar da mesa";
   size: string;
   isMaster?: boolean;
