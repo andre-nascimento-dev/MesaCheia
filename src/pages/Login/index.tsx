@@ -6,10 +6,11 @@ import { useForm } from "react-hook-form";
 import Form from "../../components/Form";
 import { GrMail } from "react-icons/gr";
 import * as yup from "yup";
-import { Container } from "./style";
+import { Container, Redirect, BoxContent } from "./style";
 import Button from "../../components/Button";
 import Logo from "../../components/Logo";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import Motion from "../../components/Motion";
 
 interface LoginData {
   email: string;
@@ -36,28 +37,33 @@ const Login = () => {
   };
   return (
     <Container>
-      <Logo />
-      <Form onSubmit={handleSubmit(handleOnSubmit)} isTransparent>
-        <Input
-          label="Email*"
-          register={register}
-          name="email"
-          error={errors.email?.message}
-          placeholder="Email"
-          icon={GrMail}
-        />
+      <Logo goToHome />
+      <BoxContent>
+        <Form onSubmit={handleSubmit(handleOnSubmit)} isTransparent>
+          <Input
+            label="Email*"
+            register={register}
+            name="email"
+            error={errors.email?.message}
+            placeholder="Email"
+            icon={GrMail}
+          />
 
-        <Input
-          label="Senha*"
-          register={register}
-          name="password"
-          error={errors.password?.message}
-          placeholder="Senha"
-          icon={GiPadlock}
-          type="password"
-        />
-        <Button type="submit">Entrar</Button>
-      </Form>
+          <Input
+            label="Senha*"
+            register={register}
+            name="password"
+            error={errors.password?.message}
+            placeholder="Senha"
+            icon={GiPadlock}
+            type="password"
+          />
+          <Button type="submit">Entrar</Button>
+          <Redirect>
+            Não possui conta ainda? <Link to="/register">cadastre-se.</Link>
+          </Redirect>
+        </Form>
+      </BoxContent>
     </Container>
   );
 };
