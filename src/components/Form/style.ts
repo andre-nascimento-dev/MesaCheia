@@ -14,6 +14,8 @@ export const Container = styled.form<ContainerProps>`
   border-radius: 10px;
 
   ${(props) => css`
-    background: ${props.isTransparent ? "rgb(111,34,50, 0.8)" : "var(--secondaryBgColor)"};
+    background: ${props.isTransparent
+      ? "rgb(111,34,50, 0.8)"
+      : "var(--secondaryBgColor)"};
   `}
 `;
