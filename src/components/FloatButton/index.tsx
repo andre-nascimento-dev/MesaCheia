@@ -5,7 +5,7 @@ interface FloatButtonProps {
   secondary?: boolean;
   icon: IconType;
   title: string;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLElement>) => void;
   type?: "button" | "submit" | "reset";
 }
 
