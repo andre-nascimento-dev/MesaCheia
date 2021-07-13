@@ -17,6 +17,12 @@ export const Container = styled.div`
   justify-content: center;
   align-items: flex-start;
   color: var(--secondaryTextColor);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const FirstContent = styled.div`
@@ -36,4 +42,17 @@ export const SecondContent = styled.div`
   h3 {
     margin-top: 20px;
   }
+`;
+
+export const ModalButtonsDiv = styled.div`
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+`;
+
+export const Box = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

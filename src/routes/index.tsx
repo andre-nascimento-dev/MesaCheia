@@ -6,6 +6,7 @@ import Route from "./route";
 import NotFound from "../pages/NotFound";
 import Tables from "../pages/tables";
 import Login from "../pages/Login";
+import Profile from "../pages/Profile";
 
 const Routes = () => {
   return (
@@ -15,6 +16,7 @@ const Routes = () => {
       <Route path="/register" component={Register} />
       <Route exact path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/dashboard/tables" component={Tables} isPrivate />
+      <Route path="/dashboard/profile" component={Profile} isPrivate />
       <Route path="*" component={NotFound} />
     </Switch>
   );
