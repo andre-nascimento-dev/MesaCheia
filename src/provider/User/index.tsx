@@ -11,6 +11,12 @@ import { User } from "../../types/user";
 import { Table, Player } from "../../types/table";
 import { useAuth } from "../Auth";
 
+interface DataProps {
+  username?: string;
+  email?: string;
+  isMaster?: boolean;
+}
+
 interface UserData {
   user: User;
   joinedTables: Table[];
@@ -18,6 +24,10 @@ interface UserData {
   getUserProfile: () => void;
   userTables: () => void;
   masterTables: () => void;
+  changeUsername: (data: DataProps) => void;
+  changeEmail: (data: DataProps) => void;
+  changeIsMaster: (isMaster: boolean) => void;
+  changeAvatar: (avatar: string) => void;
   loading: boolean;
 }
 
@@ -42,6 +52,22 @@ export const UserProvider = ({ children }: UserProviderData) => {
   const [joinedTables, setJoinedTables] = useState([] as Table[]);
   const [joinedAsMaster, setJoinedAsMaster] = useState([] as Table[]);
   const [loading, setLoading] = useState(true);
+
+  const changeUsername = ({ username }: DataProps) => {
+    setUser({ ...user, username });
+  };
+
+  const changeEmail = ({ email }: DataProps) => {
+    setUser({ ...user, email });
+  };
+
+  const changeIsMaster = (isMaster: boolean) => {
+    setUser({ ...user, isMaster });
+  };
+
+  const changeAvatar = (avatar: string) => {
+    setUser({ ...user, avatar });
+  };
 
   const getUserProfile = () => {
     const decoded: DecodedData = jwt_decode(token);
@@ -98,6 +124,19 @@ export const UserProvider = ({ children }: UserProviderData) => {
     //eslint-disable-next-line
   }, [token]);
 
+  useEffect(() => {
+    if (token) {
+      setLoading(true);
+      const decoded: DecodedData = jwt_decode(token);
+      mesaCheiaApi
+        .patch(`/users/${decoded.sub}`, user, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then(() => setLoading(false))
+        .catch(() => setLoading(false));
+    }
+  }, [user]);
+
   return (
     <UserContext.Provider
       value={{
@@ -107,7 +146,11 @@ export const UserProvider = ({ children }: UserProviderData) => {
         userTables,
         joinedAsMaster,
         masterTables,
-        loading
+        loading,
+        changeUsername,
+        changeEmail,
+        changeIsMaster,
+        changeAvatar,
       }}
     >
       {children}
