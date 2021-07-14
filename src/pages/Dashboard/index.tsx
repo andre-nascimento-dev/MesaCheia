@@ -1,13 +1,14 @@
+import { useState, useEffect } from "react";
+import { BsFillPlusCircleFill } from "react-icons/bs";
+import { AiOutlinePlus } from "react-icons/ai";
 import {
   Container,
   TitleMessage,
   ContainerButtons,
-  Icon,
   ContainerCards,
-  Item,
   ContainerDashboard,
-  MobileIcon,
 } from "./styles";
+import { useUser } from "../../provider/User";
 import Header from "../../components/Header";
 import TabMenu from "../../components/TabMenu";
 import TableCard from "../../components/TableCard";
@@ -15,86 +16,88 @@ import Button from "../../components/Button";
 import Logo from "../../components/Logo";
 import FloatButton from "../../components/FloatButton";
 import Hidden from "@material-ui/core/Hidden";
-import { useUser } from "../../provider/User";
+import MenuDashboard from "../../components/MenuDashBoard";
+import Loader from "../../components/Loader";
 
 const Dashboard = () => {
-  const { user } = useUser();
+  const {
+    user,
+    userTables,
+    masterTables,
+    joinedTables,
+    joinedAsMaster,
+    loading,
+  } = useUser();
+  const [showJoinedTables, setShowJoinedTables] = useState(true);
 
-  const func = () => {};
-
-  const table = {
-    userId: 15,
-    name: "PsycoKillers",
-    avatar: "../assets/img/image 12.svg",
-    system: "Call of Cuthulu",
-    theme: "Investigação",
-    discord: "https://discord.gg/G6WWTHqVHB",
-    needMaster: false,
-    masterId: 81,
-    total: 8,
-    isFull: false,
-    players: [
-      {
-        username: "Pot4tor",
-        avatar: "../assets/img/image 12.svg",
-        isMaster: true,
-        playerId: 81,
-      },
-      {
-        username: "Hiro",
-        avatar: "../assets/img/image 12.svg",
-        isMaster: false,
-        playerId: 15,
-      },
-      {
-        username: "Black",
-        avatar: "../assets/img/image 12.svg",
-        isMaster: false,
-        playerId: 10,
-      },
-    ],
+  const displayJoinedTables = () => {
+    setShowJoinedTables(true);
+    userTables();
   };
+
+  const displayMasterTables = () => {
+    setShowJoinedTables(false);
+    masterTables();
+  };
+
+  const tableDetails = () => {
+    console.log("detalhes");
+  };
+
+  useEffect(() => {
+    displayJoinedTables()
+  }, []);
 
   return (
     <ContainerDashboard>
-      <Header />
+      <Hidden only="xs">
+        <Header />
+      </Hidden>
+      <Hidden smUp>
+        <Logo />
+      </Hidden>
+      <TitleMessage>{`Olá, aventureiro(a) ${user?.username}!`}</TitleMessage>
       <Container>
-        <Hidden smUp>
-          <Logo />
-        </Hidden>
-        <TitleMessage>{`Olá, aventureiro ${user?.username}!`}</TitleMessage>
         <ContainerButtons>
           <TabMenu
             textFirstBtn="Mesas que participo"
             textSecondBtn="Mesas que mestro"
             isMaster={user.isMaster ?? false}
             isActived
+            onClickFirstBtn={displayJoinedTables}
+            onClickSecondBtn={displayMasterTables}
           />
           <Hidden only="xs">
             <Button hasIcon={true} biggerFont={true}>
-              <Icon />
-              criar mesa
+              <BsFillPlusCircleFill />
+              Criar Mesa
             </Button>
           </Hidden>
           <Hidden smUp>
-            <FloatButton icon={MobileIcon} title="criar mesa" />
+            <FloatButton icon={AiOutlinePlus} title="Criar Mesa" />
           </Hidden>
         </ContainerButtons>
         <ContainerCards>
-          <Item>
-            <TableCard table={table} isJoin onClick={func} />
-          </Item>
-          <Item>
-            <TableCard table={table} isJoin onClick={func} />
-          </Item>
-          <Item>
-            <TableCard table={table} isJoin onClick={func} />
-          </Item>
-          <Item>
-            <TableCard table={table} isJoin onClick={func} />
-          </Item>
+          {loading ? (
+            <Loader />
+          ) : showJoinedTables ? (
+            joinedTables.map((table) => (
+              <li key={table.id}>
+                <TableCard table={table} isJoin onClick={tableDetails} />
+              </li>
+            ))
+          ) : (
+            joinedAsMaster.map((table) => (
+              <li key={table.id}>
+                <TableCard table={table} isJoin onClick={tableDetails} />
+              </li>
+            ))
+          )}
         </ContainerCards>
       </Container>
+      <Hidden smUp>
+        <MenuDashboard />
+      </Hidden>
     </ContainerDashboard>
   );
 };

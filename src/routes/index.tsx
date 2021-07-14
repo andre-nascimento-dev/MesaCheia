@@ -4,7 +4,7 @@ import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
 import Route from "./route";
 import NotFound from "../pages/NotFound";
-import Tables from "../pages/tables";
+import Tables from "../pages/Tables";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 

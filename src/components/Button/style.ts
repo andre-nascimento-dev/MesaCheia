@@ -19,7 +19,7 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
   border: 2px solid transparent;
   outline: none;
   box-shadow: ${props => props.secondary ? "3px 3px 3px -1px rgba(78,78,80,0.7)" : "3px 3px 3px -1px rgba(195,7,63,0.7)"};
-  min-width: ${(props) => (props.small ? "80px" : "150px")};
+  min-width: ${(props) => (props.small ? "80px" : "120px")};
   padding: 8px 12px;
   transition: all 300ms ease-in-out;
 
@@ -29,6 +29,7 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 4px;
     `};
 
   &:hover:not(:disabled),
