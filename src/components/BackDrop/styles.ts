@@ -15,4 +15,5 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   background: var(--secondaryBgColor);
   border-radius: 16px;
+  padding: 8px;
 `;
