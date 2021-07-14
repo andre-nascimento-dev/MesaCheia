@@ -9,9 +9,9 @@ interface ProviderData {
 const Provider = ({ children }: ProviderData) => {
   return (
     <AuthProvider>
-      <TablesProvider>
-        <UserProvider>{children}</UserProvider>
-      </TablesProvider>
+      <UserProvider>
+        <TablesProvider>{children}</TablesProvider>
+      </UserProvider>
     </AuthProvider>
   );
 };

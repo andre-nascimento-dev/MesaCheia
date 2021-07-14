@@ -1,6 +1,6 @@
 export interface Player {
-  username: string;
-  avatar: string;
+  username?: string;
+  avatar?: string;
   isMaster: boolean;
   playerId: number;
 }
@@ -12,7 +12,7 @@ export interface Table {
   theme: string;
   discord: string;
   needMaster: boolean;
-  masterId: number;
+  masterId: number | null;
   total: number;
   isFull: boolean;
   players: Player[];

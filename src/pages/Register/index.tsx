@@ -40,7 +40,7 @@ const Register = () => {
       .string()
       .required("Campo obrigatório")
       .oneOf([yup.ref("password")], "Deve ser igual a senha"),
-    isMaster: yup.string().required("Campo obrigatório"),
+    isMaster: yup.string().nullable().required("Campo obrigatório"),
   });
 
   const {
@@ -57,7 +57,6 @@ const Register = () => {
       password,
       isMaster: isMasterBoolean,
       avatar: avatarUrl.userDefault,
-      joinedTables: [],
     };
     handleRegister(userData, history);
   };
