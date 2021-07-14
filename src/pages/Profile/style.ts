@@ -1,107 +1,100 @@
-import styled, { css } from "styled-components";
-import cursorPointer from "../../assets/img/cursor-pointer.png";
+import styled from "styled-components";
 import bgImage from "../../assets/img/profile-background.jpg";
 
-interface LiProps {
-  isSelected: boolean;
-}
-
-export const Main = styled.main`
+export const FullContainer = styled.div`
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
 
-  @media only screen and (min-width: 768px) {
-    flex-direction: column-reverse;
-    align-items: center;
+  @media (min-width: 768px) {
+    padding-bottom: 1rem;
   }
 `;
 
-export const FullContainer = styled.div`
-  height: 80vh;
-
-  max-height: 1080px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+export const Main = styled.main`
+  display: grid;
+  place-items: center;
+  flex-grow: 1;
+  width: 100%;
+  align-self: center;
+  max-width: 1400px;
 
   @media only screen and (min-width: 768px) {
-    background: url(${bgImage}) no-repeat;
+    background: url(${bgImage}) no-repeat center;
     background-size: cover;
-    margin: 20px;
-    max-width: 1400px;
-    width: 80%;
   }
 `;
 
 export const Container = styled.div`
   width: 300px;
   background: var(--secondaryBgColor);
-  padding: 15px;
-  border-radius: 10px;
+  padding: 16px 24px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  gap: 16px;
   color: var(--secondaryTextColor);
 
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  ul {
-    width: 80vw;
-    height: 50vh;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    overflow: auto;
-    padding: 5px;
-    margin-bottom: 10px;
-
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--mainButtonBg);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--secondaryButtonBg);
-    }
-
-    @media only screen and (min-width: 768px) {
-      width: 50vw;
-    }
-  }
-
   @media only screen and (min-width: 768px) {
-    background-color: #4e4e50bb;
+    background-color: rgba(0, 0, 0, 0.3);
     width: 450px;
     font-size: 1.5rem;
   }
 `;
 
-export const Li = styled.li<LiProps>`
-  margin: 5px;
-  border-radius: 100%;
-  cursor: url(${cursorPointer}), auto;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  font-size: 1rem;
+`;
 
-  :hover,
-  :focus {
-    box-shadow: 0 0 0 2px var(--secondaryTextColor);
+export const Ul = styled.ul`
+  height: 50vh;
+  width: 80vw;
+  max-width: 520px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 4px;
+  padding: 8px 16px 0;
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    width: 0.4rem;
   }
+  ::-webkit-scrollbar-track {
+    background: var(--mainButtonBg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--secondaryButtonBg);
 
-  ${(props) => css`
-    box-shadow: ${props.isSelected && "0 0 0 3px var(--secondaryTextColor)"};
-  `}
+    &:hover {
+      background-color: #950740;
+    }
+  }
+`;
+
+export const Li = styled.li`
+  border-radius: 50%;
+`;
+
+export const BoxRow = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 8px 0;
 `;
 
 export const FirstContent = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -109,18 +102,12 @@ export const SecondContent = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
-  overflow: hidden;
-
-  h3 {
-    margin-top: 20px;
-  }
+  gap: 4px;
 `;
 
 export const ModalButtonsDiv = styled.div`
-  width: 80%;
   display: flex;
-  justify-content: space-around;
+  gap: 16px;
 `;
 
 export const Box = styled.div`
@@ -128,11 +115,6 @@ export const Box = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const BoxRow = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  padding: 16px 32px;
+  gap: 16px;
 `;
