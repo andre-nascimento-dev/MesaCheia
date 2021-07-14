@@ -135,6 +135,7 @@ export const UserProvider = ({ children }: UserProviderData) => {
         .then(() => setLoading(false))
         .catch(() => setLoading(false));
     }
+    //eslint-disable-next-line
   }, [user]);
 
   return (

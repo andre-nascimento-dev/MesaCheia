@@ -4,12 +4,15 @@ import {
   useContext,
   useState,
   useEffect,
+  Dispatch,
+  SetStateAction,
 } from "react";
 import { useAuth } from "../Auth";
 import { useUser } from "../User";
 import { mesaCheiaApi } from "../../services/index";
-import { Table } from "../../types/table";
+import { Player, Table } from "../../types/table";
 import { showToast } from "../../components/Toast";
+import { toast } from "react-toastify";
 
 interface Data {
   select: string;
@@ -34,7 +37,22 @@ interface TablesProviderData {
   getActualTable: (id: number) => void;
   actualTable: Table;
   listTables: any;
+  joinTable: (
+    tableId: number | undefined,
+    username: string | undefined,
+    avatar: string | undefined,
+    isMaster: boolean | undefined,
+    playerId: number | undefined,
+    players: Player[]
+  ) => void;
   loading: boolean;
+  isShowModal: boolean;
+  setIsShowModal: Dispatch<SetStateAction<boolean>>;
+}
+
+interface Data {
+  select: string;
+  search: string;
 }
 
 interface TablesData {
@@ -51,7 +69,7 @@ export const TablesProvider = ({ children }: TablesData) => {
   const [listTables, setListTables] = useState([] as Table[]);
   const [loading, setLoading] = useState(false);
   const [actualTable, setActualTable] = useState({} as Table);
-
+  const [isShowModal, setIsShowModal] = useState(false);
   const getActualTable = (id: number) => {
     setLoading(true);
     mesaCheiaApi
@@ -200,6 +218,7 @@ export const TablesProvider = ({ children }: TablesData) => {
       })
       .then((response) => {
         setListTables(response.data);
+
         setLoading(false);
       })
       .catch((error) => {
@@ -231,6 +250,33 @@ export const TablesProvider = ({ children }: TablesData) => {
     //eslint-disable-next-line
   }, [token]);
 
+  const joinTable = (
+    tableId: number | undefined,
+    username: string | undefined,
+    avatar: string | undefined,
+    isMaster: boolean | undefined,
+    playerId: number | undefined,
+    players: Player[]
+  ) => {
+    mesaCheiaApi
+      .patch(
+        `tables/${tableId}`,
+        {
+          players: [...players, { username, avatar, isMaster, playerId }],
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        toast.success("Entrou na mesa");
+        setIsShowModal(false);
+        getTables();
+      })
+      .catch(() => {
+        toast.error("Falha ao Entrar");
+        setIsShowModal(false);
+      });
+  };
+
   return (
     <TablesProviderContext.Provider
       value={{
@@ -244,6 +290,9 @@ export const TablesProvider = ({ children }: TablesData) => {
         editTableMembers,
         actualTable,
         getActualTable,
+        isShowModal,
+        setIsShowModal,
+        joinTable,
       }}
     >
       {children}

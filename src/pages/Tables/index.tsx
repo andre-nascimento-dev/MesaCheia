@@ -4,6 +4,8 @@ import * as yup from "yup";
 import { useTables } from "../../provider/Tables";
 import { Table } from "../../types/table";
 
+import { useUser } from "../../provider/User";
+
 import Header from "../../components/Header";
 import TabMenu from "../../components/TabMenu";
 import Button from "../../components/Button";
@@ -19,6 +21,8 @@ import { CgClose } from "react-icons/cg";
 import image53 from "../../assets/img/image53.png";
 import Hidden from "@material-ui/core/Hidden";
 import {
+  Box,
+  BoxTables,
   NavButtons,
   Myform,
   SearchContainer,
@@ -27,22 +31,18 @@ import {
   ButtonContainer,
   ListTables,
   Item,
-  BoxTables,
   DashBoardTables,
   Container,
   ImgContainer,
   IconNav,
   WrapperModal,
 } from "./styles";
-import { useState } from "react";
 
-const onclick = () => {
-  console.log("entrou");
-};
+import MenuDashboard from "../../components/MenuDashBoard";
 
 const Tables = () => {
   const schema = yup.object().shape({
-    search: yup.string().required("Campo Obrigatório"),
+    search: yup.string(),
     select: yup.string().required("Campo Obrigatório"),
   });
 
@@ -55,15 +55,26 @@ const Tables = () => {
     resolver: yupResolver(schema),
   });
 
-  const { searchTables, listTables, loading } = useTables();
+  const {
+    searchTables,
+    joinTable,
+    listTables,
+    loading,
+    isShowModal,
+    setIsShowModal,
+  } = useTables();
+
   const handleForm = (data: any) => {
     searchTables(data);
+    reset();
   };
+  const { user } = useUser();
 
-  const [test, setTest] = useState(false);
   return (
     <DashBoardTables>
-      <Header />
+      <Hidden only="xs">
+        <Header />
+      </Hidden>
       <Container>
         <Hidden smUp>
           <Logo />
@@ -71,7 +82,7 @@ const Tables = () => {
         <NavButtons>
           <TabMenu
             isActived
-            isMaster={false}
+            isMaster={user.isMaster ?? false}
             textFirstBtn={"Vaga para Participar"}
             textSecondBtn={"Vaga para mestrar"}
           />
@@ -128,12 +139,44 @@ const Tables = () => {
               <Loader />
             ) : (
               listTables.map((table: Table) => (
-                <Item>
-                  <TableCard table={table} onClick={() => setTest(!test)} />{" "}
+                <Item key={table.id}>
+                  <TableCard
+                    table={table}
+                    onClick={() => setIsShowModal(true)}
+                  />
+                  <Box>
+                    <BackDrop isOpened={isShowModal}>
+                      <p>Você Quer Mesmo Fazer Isso?</p>
+                      <WrapperModal>
+                        <FloatButton
+                          title="Não"
+                          icon={CgClose}
+                          type="button"
+                          onClick={() => setIsShowModal(false)}
+                        />
+                        <FloatButton
+                          title="Sim"
+                          icon={GoCheck}
+                          type="button"
+                          onClick={() =>
+                            joinTable(
+                              table.id,
+                              user.username,
+                              user.avatar,
+                              user.isMaster,
+                              user.id,
+                              table.players
+                            )
+                          }
+                        />
+                      </WrapperModal>
+                    </BackDrop>
+                  </Box>
                 </Item>
               ))
             )}
           </ListTables>
+
           <ImgContainer>
             <figure>
               <img src={image53} alt="image53" />
@@ -141,6 +184,9 @@ const Tables = () => {
           </ImgContainer>
         </BoxTables>
       </Container>
+      <Hidden smUp>
+        <MenuDashboard />
+      </Hidden>
     </DashBoardTables>
   );
 };

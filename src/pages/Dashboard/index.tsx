@@ -213,6 +213,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     displayJoinedTables();
+    //eslint-disable-next-line
   }, []);
 
   return (
