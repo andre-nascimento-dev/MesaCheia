@@ -18,6 +18,8 @@ export const MyAvatar = styled.figure<AvatarProps>`
 export const Icon = styled.img<AvatarProps>`
   width: ${(props) => `${props.size}px`};
   height: ${(props) => `${props.size}px`};
+  border-radius: 50%;
+  object-fit: cover;
   transition: all 300ms ease-in-out;
 
   ${(props) =>

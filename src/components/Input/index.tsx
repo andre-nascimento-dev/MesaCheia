@@ -9,6 +9,7 @@ interface InputProps {
   register: any;
   error: string;
   fontSize?: number;
+  required?: boolean;
 }
 
 const Input = ({
@@ -18,6 +19,7 @@ const Input = ({
   name,
   error,
   fontSize,
+  required,
   ...rest
 }: InputProps) => {
   return (
@@ -25,7 +27,7 @@ const Input = ({
       {label}
       <InputContainer isErrored={!!error}>
         {Icon && <Icon />}
-        <input {...register(name)} {...rest} />
+        <input {...register(name)} {...rest} required={required}/>
       </InputContainer>
       <div>{!!error && <span>{error}</span>}</div>
     </Container>

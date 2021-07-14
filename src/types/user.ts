@@ -4,6 +4,5 @@ export interface User {
   password?: string;
   isMaster?: boolean;
   avatar?: string;
-  joinedTables?: number[];
   id?: number;
 }

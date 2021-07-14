@@ -1,6 +1,5 @@
 import { Table } from "../../types/table";
 import Avatar from "../Avatar";
-import urlAvatar from "../Avatar/avatar.json";
 import Button from "../Button";
 import { Container, Counter, Content } from "./styles";
 import { Hidden } from "@material-ui/core";
@@ -16,11 +15,11 @@ const TableCard = ({ table, isJoin, onClick }: TableCardProps) => {
     <Container>
       <div>
         <Hidden smUp>
-          <Avatar url={urlAvatar.tableDefault} size="30" alt="Avatar da mesa" />
+          <Avatar url={table.avatar} size="30" alt="Avatar da mesa" />
         </Hidden>
 
         <Hidden only="xs">
-          <Avatar url={urlAvatar.tableDefault} size="50" alt="Avatar da mesa" />
+          <Avatar url={table.avatar} size="50" alt="Avatar da mesa" />
         </Hidden>
 
         <h2>{table.name}</h2>
