@@ -3,15 +3,17 @@ import Input from "../../components/Input";
 import { IoMdNavigate } from "react-icons/io";
 
 export const DashBoardTables = styled.div`
-  @media only screen and (max-width: 768px) {
-    height: 100vh;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column-reverse;
-  }
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
-export const Container = styled.main``;
+export const Container = styled.main`
+  @media only screen and (max-width: 768px) {
+  }
+`;
 
 export const NavButtons = styled.nav`
   margin-top: 50px;
@@ -21,7 +23,7 @@ export const NavButtons = styled.nav`
 export const Myform = styled.form`
   display: flex;
   justify-content: space-around;
-  width: 60%;
+  width: 70%;
   margin-top: 50px;
   flex-wrap: wrap;
   @media only screen and (max-width: 768px) {
@@ -87,10 +89,10 @@ export const ListTables = styled.ul`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  width: 90vw;
+  width: 100vw;
   height: 55vh;
   margin-top: 40px;
-  overflow: auto;
+  overflow-y: auto;
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -105,8 +107,7 @@ export const ListTables = styled.ul`
   }
 
   @media only screen and (max-width: 768px) {
-    width: 100vw;
-    height: 20vh;
+    height: 21vh;
     justify-content: center;
     ::-webkit-scrollbar {
       display: none;
@@ -144,4 +145,9 @@ export const WrapperModal = styled.div`
   margin-top: 20px;
   display: flex;
   justify-content: space-around;
+`;
+
+export const Box = styled.div`
+  color: #fff;
+  font-weight: bold;
 `;
