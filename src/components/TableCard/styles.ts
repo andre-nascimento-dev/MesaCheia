@@ -15,6 +15,10 @@ export const Container = styled.div`
     padding: 5px;
   }
 
+  Button {
+    align-self: flex-end;
+  }
+
   @media only screen and (min-width: 768px) {
     width: 350px;
     font-size: 1rem;

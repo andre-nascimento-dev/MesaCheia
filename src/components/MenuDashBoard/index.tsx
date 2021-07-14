@@ -1,33 +1,34 @@
 import { useAuth } from "../../provider/Auth";
-import { Menu, Ul, Li, NavLink } from "./style";
+import { Ul, NavLink } from "./style";
 
 const MenuDashboard = () => {
   const { handleLogout } = useAuth();
+
   return (
-    <Menu>
+    <nav>
       <Ul>
-        <Li>
+        <li>
           <NavLink exact to="/dashboard" activeStyle={{}}>
-            Inicio
+            Início
           </NavLink>
-        </Li>
-        <Li>
+        </li>
+        <li>
           <NavLink exact to="/dashboard/tables" activeStyle={{}}>
             Buscar mesa
           </NavLink>
-        </Li>
-        <Li>
+        </li>
+        <li>
           <NavLink exact to="/dashboard/profile" activeStyle={{}}>
             Minha conta
           </NavLink>
-        </Li>
-        <Li>
+        </li>
+        <li>
           <NavLink exact to="/" activeStyle={{}} onClick={() => handleLogout()}>
             Sair
           </NavLink>
-        </Li>
+        </li>
       </Ul>
-    </Menu>
+    </nav>
   );
 };
 export default MenuDashboard;

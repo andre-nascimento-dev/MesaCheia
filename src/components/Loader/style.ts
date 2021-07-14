@@ -40,6 +40,6 @@ export const Bar = styled.div`
     height: 100%;
     width: 0;
     background-color: #950740;
-    animation: ${load} 1s linear forwards;
+    animation: ${load} 30ms linear forwards;
   }
 `;

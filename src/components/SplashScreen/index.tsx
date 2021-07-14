@@ -1,12 +1,16 @@
-import { Title, LeftDoor, RightDoor } from "./style";
+import { Container, Title, Bouncer } from "./style";
 
 const SplashScren = () => {
   return (
-    <>
+    <Container>
       <Title> MesaCheia</Title>
-      <LeftDoor />
-      <RightDoor />
-    </>
+      <Bouncer>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </Bouncer>
+    </Container>
   );
 };
 

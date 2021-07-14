@@ -38,7 +38,7 @@ const TableCard = ({ table, isJoin, onClick }: TableCardProps) => {
             <span>Sistema:</span> {table.system}
           </p>
           <p>
-            <span>#{table.userId}</span>
+            <span>#{table.id}</span>
           </p>
         </Content>
         <Hidden smUp>
