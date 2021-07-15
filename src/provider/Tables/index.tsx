@@ -1,21 +1,13 @@
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { ReactNode, createContext, useContext, useState } from "react";
 import { useAuth } from "../Auth";
 import { useUser } from "../User";
 import { mesaCheiaApi } from "../../services/index";
 import { Player, Table } from "../../types/table";
 import { showToast } from "../../components/Toast";
-import { toast } from "react-toastify";
+import { User } from "../../types/user";
 
-interface Data {
-  select: string;
+interface SearchData {
+  category: string;
   search: string;
 }
 
@@ -29,30 +21,19 @@ interface EditInfo {
 
 interface TablesProviderData {
   createTable: (data: Table) => void;
-  searchTables: (data: Data) => void;
+  searchTables: (data: SearchData, needMaster: boolean) => void;
   deleteTable: (id: number) => void;
   leaveTable: (table: Table, userId: number) => void;
   editTableInfo: (id: number, data: EditInfo) => void;
   editTableMembers: (table: Table, playerId: number) => void;
   getActualTable: (id: number) => void;
   actualTable: Table;
-  listTables: any;
-  joinTable: (
-    tableId: number | undefined,
-    username: string | undefined,
-    avatar: string | undefined,
-    isMaster: boolean | undefined,
-    playerId: number | undefined,
-    players: Player[]
-  ) => void;
+  listTables: Table[];
+  joinTable: (table: Table, user: User, asMaster: boolean) => void;
   loading: boolean;
-  isShowModal: boolean;
-  setIsShowModal: Dispatch<SetStateAction<boolean>>;
-}
-
-interface Data {
-  select: string;
-  search: string;
+  modalLoading: boolean;
+  getNeedPlayersTables: () => void;
+  getNeedMasterTables: () => void;
 }
 
 interface TablesData {
@@ -65,13 +46,15 @@ const TablesProviderContext = createContext<TablesProviderData>(
 
 export const TablesProvider = ({ children }: TablesData) => {
   const { token } = useAuth();
+  const { user } = useUser();
   const { userTables, masterTables } = useUser();
   const [listTables, setListTables] = useState([] as Table[]);
   const [loading, setLoading] = useState(false);
+  const [modalLoading, setModalLoading] = useState(false);
   const [actualTable, setActualTable] = useState({} as Table);
-  const [isShowModal, setIsShowModal] = useState(false);
+
   const getActualTable = (id: number) => {
-    setLoading(true);
+    setModalLoading(true);
     mesaCheiaApi
       .get(`/tables/${id}`, {
         headers: {
@@ -80,11 +63,11 @@ export const TablesProvider = ({ children }: TablesData) => {
       })
       .then((response) => {
         setActualTable(response.data);
-        setLoading(false);
+        setModalLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        setLoading(false);
+        setModalLoading(false);
       });
   };
 
@@ -207,18 +190,34 @@ export const TablesProvider = ({ children }: TablesData) => {
       .catch((error) => console.log(error));
   };
 
-  const searchTables = (data: Data) => {
+  const searchTables = (data: SearchData, needMaster: boolean) => {
     setLoading(true);
-    const { select } = data;
-    const { search } = data;
+    const { category, search } = data;
 
     mesaCheiaApi
-      .get(`tables?${select}_like=${search}`, {
+      .get(`tables?${category}_like=${search}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        setListTables(response.data);
-
+        if (needMaster) {
+          setListTables(
+            response.data.filter(
+              (table: Table) =>
+                table.needMaster === true &&
+                table.players.every(
+                  (player: Player) => player.playerId !== user.id
+                )
+            )
+          );
+        } else {
+          setListTables(
+            response.data.filter((table: Table) =>
+              table.players.every(
+                (player: Player) => player.playerId !== user.id
+              )
+            )
+          );
+        }
         setLoading(false);
       })
       .catch((error) => {
@@ -227,53 +226,90 @@ export const TablesProvider = ({ children }: TablesData) => {
       });
   };
 
-  const getTables = () => {
+  const getNeedPlayersTables = () => {
     setLoading(true);
     mesaCheiaApi
-      .get(`tables`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        setListTables(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    if (token) {
-      getTables();
-    }
-    //eslint-disable-next-line
-  }, [token]);
-
-  const joinTable = (
-    tableId: number | undefined,
-    username: string | undefined,
-    avatar: string | undefined,
-    isMaster: boolean | undefined,
-    playerId: number | undefined,
-    players: Player[]
-  ) => {
-    mesaCheiaApi
-      .patch(
-        `tables/${tableId}`,
-        {
-          players: [...players, { username, avatar, isMaster, playerId }],
+      .get("/tables?isFull=false", {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-      .then((response) => {
-        toast.success("Entrou na mesa");
-        setIsShowModal(false);
-        getTables();
       })
-      .catch(() => {
-        toast.error("Falha ao Entrar");
-        setIsShowModal(false);
+      .then((response) => {
+        setListTables(
+          response.data.filter((table: Table) =>
+            table.players.every((player: Player) => player.playerId !== user.id)
+          )
+        );
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const getNeedMasterTables = () => {
+    setLoading(true);
+    mesaCheiaApi
+      .get("/tables?isFull=false&needMaster=true", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setListTables(
+          response.data.filter((table: Table) =>
+            table.players.every((player: Player) => player.playerId !== user.id)
+          )
+        );
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const joinTable = (table: Table, user: User, asMaster: boolean) => {
+    let data = {};
+
+    if (asMaster) {
+      data = {
+        needMaster: false,
+        masterId: user.id,
+        isFull: table.players.length + 1 === table.total ? true : false,
+        players: [
+          ...table.players,
+          {
+            username: user.username,
+            avatar: user.avatar,
+            isMaster: true,
+            playerId: user.id,
+          },
+        ],
+      };
+    } else {
+      data = {
+        isFull: table.players.length + 1 === table.total ? true : false,
+        players: [
+          ...table.players,
+          {
+            username: user.username,
+            avatar: user.avatar,
+            isMaster: false,
+            playerId: user.id,
+          },
+        ],
+      };
+    }
+    mesaCheiaApi
+      .patch(`tables/${table.id}`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        showToast({ type: "info", message: "Que comecem os jogos!" });
+        if (asMaster) {
+          getNeedMasterTables();
+        } else {
+          getNeedPlayersTables();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -290,9 +326,10 @@ export const TablesProvider = ({ children }: TablesData) => {
         editTableMembers,
         actualTable,
         getActualTable,
-        isShowModal,
-        setIsShowModal,
+        modalLoading,
         joinTable,
+        getNeedPlayersTables,
+        getNeedMasterTables,
       }}
     >
       {children}
