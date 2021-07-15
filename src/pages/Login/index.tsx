@@ -10,6 +10,7 @@ import Logo from "../../components/Logo";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import Motion from "../../components/Motion";
 
 interface LoginData {
   email: string;
@@ -39,35 +40,39 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <Logo goToHome />
-      <BoxContent>
-        <Form onSubmit={handleSubmit(handleOnSubmit)} isTransparent>
-          <Input
-            label="E-mail*"
-            register={register}
-            name="email"
-            error={errors.email?.message}
-            placeholder="E-mail"
-            icon={MdEmail}
-          />
+    <Motion>
+      <Container>
+        <Logo goToHome />
+        <BoxContent>
+          <Form onSubmit={handleSubmit(handleOnSubmit)} isTransparent>
+            <Input
+              label="E-mail*"
+              register={register}
+              name="email"
+              error={errors.email?.message}
+              placeholder="E-mail"
+              icon={MdEmail}
+            />
 
-          <Input
-            label="Senha*"
-            register={register}
-            name="password"
-            error={errors.password?.message}
-            placeholder="Senha"
-            icon={BsFillLockFill}
-            type="password"
-          />
-          <Button type="submit" biggerFont>Entrar</Button>
-          <Redirect>
-            Não é cadastrado? <Link to="/register">Criar conta</Link>
-          </Redirect>
-        </Form>
-      </BoxContent>
-    </Container>
+            <Input
+              label="Senha*"
+              register={register}
+              name="password"
+              error={errors.password?.message}
+              placeholder="Senha"
+              icon={BsFillLockFill}
+              type="password"
+            />
+            <Button type="submit" biggerFont>
+              Entrar
+            </Button>
+            <Redirect>
+              Não é cadastrado? <Link to="/register">Criar conta</Link>
+            </Redirect>
+          </Form>
+        </BoxContent>
+      </Container>
+    </Motion>
   );
 };
 

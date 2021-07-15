@@ -1,16 +1,19 @@
-import MenuHome from "../../components/MenuHome";
 import { Ladingpage, Title, About, Footer, Dice } from "./style";
+import MenuHome from "../../components/MenuHome";
+import Motion from "../../components/Motion";
 
 const Home = () => {
   return (
     <>
-      <MenuHome />
-      <Ladingpage id="home">
-        <Title>
-          <h1>Mesa</h1>
-          <h1>Cheia</h1>
-        </Title>
-      </Ladingpage>
+      <Motion>
+        <MenuHome />
+        <Ladingpage id="home">
+          <Title>
+            <h1>Mesa</h1>
+            <h1>Cheia</h1>
+          </Title>
+        </Ladingpage>
+      </Motion>
       <About id="about">
         <h2>Sobre</h2>
         <p>

@@ -50,7 +50,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px;
+  padding: 8px;
   font-size: 1rem;
 `;
 
