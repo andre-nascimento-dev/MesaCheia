@@ -75,8 +75,8 @@ Projeto da equipe envolvendo desde a criação de uma fake API com JSON Server e
 
 ## Layout
 
-![Login](https://i.ibb.co/6NNxDXL/image.png "Login")
-![Register](https://i.ibb.co/rb58T9Z/image.png "Register")
+![Login](https://i.ibb.co/wd4NY67/image.png "Login")
+![Register](https://i.ibb.co/C0CQ4Y7/image.png "Register")
 ![Dashboard](https://i.ibb.co/3c9jK78/image.png "Dashboard")
 ![Login Mobile](https://i.ibb.co/3y2hZ88/image.png "Login Mobile")
 ![Register Mobile](https://i.ibb.co/F7904pN/image.png "Register Mobile")
