@@ -4,16 +4,15 @@ import Motion from "../../components/Motion";
 
 const Home = () => {
   return (
-    <>
-      <Motion>
-        <MenuHome />
-        <Ladingpage id="home">
-          <Title>
-            <h1>Mesa</h1>
-            <h1>Cheia</h1>
-          </Title>
-        </Ladingpage>
-      </Motion>
+    <Motion>
+      <MenuHome />
+      <Ladingpage id="home">
+        <Title>
+          <h1>Mesa</h1>
+          <h1>Cheia</h1>
+        </Title>
+      </Ladingpage>
+
       <About id="about">
         <h2>Sobre</h2>
         <p>
@@ -71,7 +70,7 @@ const Home = () => {
         </Footer>
         <Dice />
       </About>
-    </>
+    </Motion>
   );
 };
 
