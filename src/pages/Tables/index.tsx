@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Hidden } from "@material-ui/core";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import { RiSendPlane2Fill } from "react-icons/ri";
+import { IoMdRefresh } from "react-icons/io";
 import { BiSearch } from "react-icons/bi";
 import { Table } from "../../types/table";
 import { useUser } from "../../provider/User";
@@ -19,6 +20,7 @@ import Logo from "../../components/Logo";
 import Loader from "../../components/Loader";
 import BackDrop from "../../components/BackDrop";
 import MenuDashboard from "../../components/MenuDashBoard";
+import NothingHere from "../../components/NothingHere";
 import {
   BoxTables,
   Form,
@@ -108,7 +110,7 @@ const Tables = () => {
           <TabMenu
             isActived={showNeedPlayersTables}
             isMaster={user.isMaster ?? false}
-            textFirstBtn={"Vaga para Participar"}
+            textFirstBtn={"Vaga para participar"}
             textSecondBtn={"Vaga para mestrar"}
             onClickFirstBtn={displayNeedPlayersTables}
             onClickSecondBtn={displayNeedMasterTables}
@@ -147,13 +149,24 @@ const Tables = () => {
                   title={"Pesquisar"}
                 ></FloatButton>
               </Hidden>
+              <FloatButton
+                title="Ver todas"
+                type="reset"
+                icon={IoMdRefresh}
+                secondary
+                onClick={
+                  showNeedPlayersTables
+                    ? displayNeedPlayersTables
+                    : displayNeedMasterTables
+                }
+              />
             </div>
           </Form>
           <BoxTables>
             <ListTables>
               {loading ? (
                 <Loader />
-              ) : (
+              ) : !!listTables[0] ? (
                 listTables.map((table: Table) => (
                   <li key={table.id}>
                     <TableCard
@@ -162,6 +175,8 @@ const Tables = () => {
                     />
                   </li>
                 ))
+              ) : (
+                <NothingHere />
               )}
             </ListTables>
 

@@ -8,10 +8,11 @@ interface Props {
 const Motion = ({ children }: Props) => {
   return (
     <motion.div
-      initial={{ y: -1000 }}
-      animate={{ y: 0 }}
-      exit={{ y: 1000 }}
+      initial={{ scaleX: 0 }}
+      animate={{ scaleX: 1 }}
+      exit={{ scaleX: 0 }}
       transition={{ duration: 0.5 }}
+      style={{ transformOrigin: "left" }}
     >
       {children}
     </motion.div>

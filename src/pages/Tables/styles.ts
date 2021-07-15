@@ -121,17 +121,13 @@ export const ImgContainer = styled.div`
   background: url(${bgImg}) no-repeat center;
   background-size: contain;
 
-  @media only screen and (max-width: 1040px) {
-    width: 250px;
-  }
-
   @media only screen and (max-width: 1024px) {
     display: none;
   }
 `;
 
 export const WrapperModal = styled.div`
-padding: 8px;
+  padding: 8px;
   width: 250px;
   display: flex;
   flex-direction: column;
@@ -150,4 +146,3 @@ padding: 8px;
     gap: 16px;
   }
 `;
-

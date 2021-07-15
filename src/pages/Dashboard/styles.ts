@@ -83,11 +83,12 @@ export const ContainerButtons = styled.div`
 
 export const ContainerCards = styled.ul`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
   width: 100%;
   height: 100%;
+  padding-bottom: 1rem;
   overflow-y: scroll;
 
   ::-webkit-scrollbar {
@@ -99,10 +100,11 @@ export const ContainerCards = styled.ul`
       width: 0.6rem;
     }
     ::-webkit-scrollbar-track {
-      background: var(--mainButtonBg);
+      
+      background: var(--secondaryButtonBg);
     }
     ::-webkit-scrollbar-thumb {
-      background: var(--secondaryButtonBg);
+      background: var(--mainButtonBg);
     }
     ::-webkit-scrollbar-thumb:hover {
       background: var(--secondaryBgColor);
@@ -149,11 +151,19 @@ export const TableDetails = styled.div`
     p {
       flex-grow: 1;
       text-align: center;
+      line-break: loose;
+      
+    }
+
+    button {
+      flex-shrink: 0;
     }
   }
 
   p {
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     span {
       font-weight: normal;
@@ -258,7 +268,7 @@ export const ExitModal = styled.div`
 
 export const EditAvatar = styled.form`
   width: 300px;
-  padding: 16px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -271,7 +281,7 @@ export const EditAvatar = styled.form`
 
 export const EditName = styled.form`
   width: 300px;
-  padding: 16px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -284,7 +294,7 @@ export const EditName = styled.form`
 
 export const EditTheme = styled.form`
   width: 300px;
-  padding: 16px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -297,7 +307,7 @@ export const EditTheme = styled.form`
 
 export const EditSystem = styled.form`
   width: 300px;
-  padding: 16px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -310,7 +320,7 @@ export const EditSystem = styled.form`
 
 export const EditDiscord = styled.form`
   width: 300px;
-  padding: 16px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -323,9 +333,8 @@ export const EditDiscord = styled.form`
 
 export const EditMembers = styled.div`
   width: 300px;
-  min-height: 200px;
   max-height: 400px;
-  padding: 16px 8px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -340,7 +349,7 @@ export const EditMembers = styled.div`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding: 32px 16px 8px;
+    padding: 16px;
     gap: 4px;
     overflow-y: scroll;
 
@@ -377,7 +386,7 @@ export const MemberDisplay = styled.li`
 `;
 
 export const KickMemberModal = styled.div`
-  padding: 16px;
+  padding: 8px;
   width: 250px;
   display: flex;
   flex-direction: column;

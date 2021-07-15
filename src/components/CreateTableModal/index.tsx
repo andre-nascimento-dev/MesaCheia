@@ -17,7 +17,7 @@ import Button from "../Button";
 import avatarImg from "../Avatar/avatar.json";
 
 interface Props {
-   open: Dispatch<SetStateAction<boolean>>;
+  open: Dispatch<SetStateAction<boolean>>;
 }
 
 interface FormValues {
@@ -30,12 +30,15 @@ interface FormValues {
   total: number;
 }
 
-const CreateTableModal = ({open}: Props) => {
+const CreateTableModal = ({ open }: Props) => {
   const { user } = useUser();
   const { createTable } = useTables();
-  
+
   const schema = yup.object().shape({
-    name: yup.string().required("Campo obrigatório"),
+    name: yup
+      .string()
+      .required("Campo obrigatório")
+      .max(40, "Máximo de 40 caracteres"),
     theme: yup.string().required("Campo obrigatório"),
     system: yup.string().required("Campo obrigatório"),
     discord: yup.string().url("Link inválido").required("Campo obrigatório"),
@@ -45,7 +48,8 @@ const CreateTableModal = ({open}: Props) => {
       .number()
       .typeError("Digite um número")
       .required("Campo obrigatório")
-      .min(2, "No mínimo 2 membros"),
+      .min(2, "No mínimo 2 membros")
+      .max(20, "No máximo 20 membros"),
   });
 
   const {
@@ -94,9 +98,9 @@ const CreateTableModal = ({open}: Props) => {
   };
 
   const handleCancel = () => {
-     open(false);
-     reset();
-  }
+    open(false);
+    reset();
+  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">

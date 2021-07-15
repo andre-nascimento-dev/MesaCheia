@@ -28,7 +28,7 @@ import {
   EditDiscord,
   EditMembers,
   MemberDisplay,
-  KickMemberModal
+  KickMemberModal,
 } from "./styles";
 import { useUser } from "../../provider/User";
 import { useTables } from "../../provider/Tables";
@@ -46,6 +46,7 @@ import CreateTableModal from "../../components/CreateTableModal";
 import BackDrop from "../../components/BackDrop";
 import Avatar from "../../components/Avatar";
 import DropDown from "../../components/DropDown";
+import NothingHere from "../../components/NothingHere";
 
 interface FormValues {
   name?: string;
@@ -88,7 +89,7 @@ const Dashboard = () => {
   const [confirmKick, setConfirmKick] = useState(false);
 
   const schema = yup.object().shape({
-    name: yup.string(),
+    name: yup.string().max(40, "Máximo de 40 caracteres"),
     theme: yup.string(),
     system: yup.string(),
     discord: yup.string().url("Link inválido"),
@@ -204,7 +205,7 @@ const Dashboard = () => {
   const handleConfirmKick = (id: number) => {
     setCurrentPlayerId(id);
     setConfirmKick(true);
-  }
+  };
 
   const handleEditMembers = () => {
     editTableMembers(actualTable, currentPlayerId);
@@ -213,7 +214,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     displayJoinedTables();
-    //eslint-disable-next-line
   }, []);
 
   return (
@@ -232,7 +232,7 @@ const Dashboard = () => {
               textFirstBtn="Mesas que participo"
               textSecondBtn="Mesas que mestro"
               isMaster={user.isMaster ?? false}
-              isActived
+              isActived={showJoinedTables}
               onClickFirstBtn={displayJoinedTables}
               onClickSecondBtn={displayMasterTables}
             />
@@ -257,7 +257,7 @@ const Dashboard = () => {
           <ContainerCards>
             {loading ? (
               <Loader />
-            ) : showJoinedTables ? (
+            ) : showJoinedTables && !!joinedTables[0] ? (
               joinedTables.map((table) => (
                 <li key={table.id}>
                   <TableCard
@@ -267,7 +267,7 @@ const Dashboard = () => {
                   />
                 </li>
               ))
-            ) : (
+            ) : !showJoinedTables && !!joinedAsMaster[0] ? (
               joinedAsMaster.map((table) => (
                 <li key={table.id}>
                   <TableCard
@@ -277,6 +277,8 @@ const Dashboard = () => {
                   />
                 </li>
               ))
+            ) : (
+              <NothingHere />
             )}
           </ContainerCards>
         </Container>
@@ -527,28 +529,28 @@ const Dashboard = () => {
       <BackDrop isOpened={openMembers}>
         <EditMembers>
           <ul>
-          {actualTable.players?.map((player) => (
+            {actualTable.players?.map((player) => (
               <MemberDisplay key={player.playerId}>
                 <div>
-                <Avatar
-                  size="40"
-                  alt="Avatar do usuário"
-                  url={player.avatar}
-                  isMaster={player.isMaster}
-                />
-                <span>{player.username}</span>
+                  <Avatar
+                    size="40"
+                    alt="Avatar do usuário"
+                    url={player.avatar}
+                    isMaster={player.isMaster}
+                  />
+                  <span>{player.username}</span>
                 </div>
-                {player.playerId !== user.id &&
-                <FloatButton
-                secondary
-                icon={TiUserDelete}
-                title="Expulsar"
-                onClick={() => handleConfirmKick(player.playerId)}
-                />
-              }
+                {player.playerId !== user.id && (
+                  <FloatButton
+                    secondary
+                    icon={TiUserDelete}
+                    title="Expulsar"
+                    onClick={() => handleConfirmKick(player.playerId)}
+                  />
+                )}
               </MemberDisplay>
             ))}
-            </ul>
+          </ul>
           <div>
             <FloatButton
               secondary
