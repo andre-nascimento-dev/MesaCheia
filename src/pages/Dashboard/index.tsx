@@ -71,7 +71,7 @@ const Dashboard = () => {
     leaveTable,
     editTableInfo,
     editTableMembers,
-    loading: tableLoader,
+    modalLoading,
   } = useTables();
   const [showJoinedTables, setShowJoinedTables] = useState(true);
   const [openCreateModal, setOpenCreateModal] = useState(false);
@@ -291,7 +291,7 @@ const Dashboard = () => {
 
       <BackDrop isOpened={openDetails}>
         <TableDetails>
-          {tableLoader ? (
+          {modalLoading ? (
             <Spinner>
               <div></div>
               <div></div>
