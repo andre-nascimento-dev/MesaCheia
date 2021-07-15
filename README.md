@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# MesaCheia
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projeto desenvolvido para os jogadores de RPG de Mesa criarem seus grupos com o mestre e iniciarem suas aventuras de forma digital.
 
-## Available Scripts
+#### Problema a ser resolvido
 
-In the project directory, you can run:
+Em meio ao cenário de pandemia que adentramos em 2020, muitas mesas de RPG acabaram pelo motivo de não haver mais reuniões presenciais, com isso o modelo de jogar online cresceu bastante, mas nem sempre as mesas conseguiam ficar cheias com todos os mestres e jogadores. Sendo assim o _MesaCheia_ vem com a proposta de juntar grupos distintos que nunca jogaram junto, mas que a partir daqui podem se encontrar e começar as suas aventuras.
 
-### `yarn start`
+## Features do projeto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- JSON Server
+- Home
+- Register
+- Login
+- Dashboard
+- Dashboard/Tables
+- Dashboard/Profile
+- Not Found
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Tecnologias
 
-### `yarn test`
+- **Typescript**
+- **React**
+- **ContextAPI**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Bibliotecas utilizadas
 
-### `yarn build`
+- Styled Components
+- Axios
+- JWT Decode
+- Yup
+- React Hook Form
+- @hookform/resolvers
+- React router DOM
+- Toastify
+- Framer Motion
+- React Icons
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**_Linha para instalar bibliotecas_**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```shell
+yarn add styled-components @types/styled-components axios @types/axios jwt-decode @types/jwt-decode yup @types/yup, react-hook-form @hookform/resolvers react-router-dom @types/react-router-dom react-toastify @types/toastify-js framer-motion react-icons @types/react-icons
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**ou**
 
-### `yarn eject`
+```shell
+npm install styled-components @types/styled-components axios @types/axios jwt-decode @types/jwt-decode yup @types/yup, react-hook-form @hookform/resolvers react-router-dom @types/react-router-dom react-toastify @types/toastify-js framer-motion react-icons @types/react-icons
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Equipe
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Projeto implementado pelos devs:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+[Laiane Suzart](https://www.linkedin.com/in/laianesuzart/) **_P.O._**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+[André Nascimento](https://www.linkedin.com/in/andre-nascimento-b543831a9/) **_T.L._**
 
-## Learn More
+[Charles Pinheiro](https://www.linkedin.com/in/charles-pinheiro-052356205/) **_Q.A._**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[Eduardo Godoi](https://www.linkedin.com/in/eduardo-godoi-12263b122/) **_Q.A._**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Guilherme Gonçalves](https://www.linkedin.com/in/guilhermecosgoncalves/) **_S.M._**
+
+Todos os devs além de desenvolverem o código executaram as funções que estão ao lado do nome, como forma de agregar conhecimento sobre as funções de um projeto.
+
+## Ferramentas
+
+Projeto todo seguindo a metodologia do _Scrum_, tendo como cerimonias as dailies e a retrospectiva, sendo desenvolvido em duas sprints de uma semana.
+Para a organização de tarefas e features a serem feitas foi empregado o uso da ferramenta _Trello_, organização de documentos e planejamento geral _Notion_, e para crianção da interface o _Figma_.
+
+### Complexidade
+
+Projeto da equipe envolvendo desde a criação de uma fake API com JSON Server e também todo o planejamento do front end com atenção para UX/UI.
+
+## Layout
+
+![Login](https://i.ibb.co/6NNxDXL/image.png "Login")
+![Register](https://i.ibb.co/rb58T9Z/image.png "Register")
+![Dashboard](https://i.ibb.co/3c9jK78/image.png "Dashboard")
+![Login Mobile](https://i.ibb.co/3y2hZ88/image.png "Login Mobile")
+![Register Mobile](https://i.ibb.co/F7904pN/image.png "Register Mobile")
+![Dashboard Mobile](https://i.ibb.co/jJq83Bg/image.png "Dashboard Mobile")
